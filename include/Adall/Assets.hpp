@@ -5,4 +5,8 @@
 #ifndef ADALL_INCLUDE_ADALL_ASSETS_HPP_
 #define ADALL_INCLUDE_ADALL_ASSETS_HPP_
 
+class Assets {
+
+};
+
 #endif //ADALL_INCLUDE_ADALL_ASSETS_HPP_

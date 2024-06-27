@@ -2,47 +2,66 @@
 #define ADALL_INCLUDE_ADALL_ENTITY_HPP_
 
 #include "Adall/Component.hpp"
-#include <memory>
 #include <tuple>
 
-typedef std::tuple<CTransform, CLifespan, CInput, CBoundingBox, CAnimation, CGravity, CState> ComponentTuple;
+
+typedef std::tuple<CTransform, CLifespan, CInput, CBoundingBox, CAnimation, CGravity, CScore, CState> ComponentTuple;
+typedef std::bitset<std::tuple_size_v<ComponentTuple>> ComponentMask;
 
 class Entity {
  private:
   friend class EntityManager;
 
-  bool active_{true};
-  size_t id_{0};
-  std::string tag_{"default"};
+  bool        m_active{true};
+  size_t      m_id{0};
+  std::string m_tag{"default"};
 
   ComponentTuple m_components;
+  ComponentMask m_component_mask;
 
   Entity(size_t id, const std::string &tag);
+
+ template <typename T, typename Tuple>
+ struct index_of;
+
+ template <typename T>
+ struct index_of<T, std::tuple<>> {
+  static constexpr size_t value = 0;
+ };
+
+ template<typename T, typename U, typename ... Ts>
+ struct index_of<T, std::tuple<U, Ts...>> {
+  static const size_t value = 1 + index_of<T, std::tuple<Ts...>>::value;
+ };
+
+ template <typename T, typename... Ts>
+   struct index_of<T, std::tuple<T, Ts...>> {
+  static constexpr size_t value = 0;
+ };
 
  public:
   void destroy();
 
-  size_t id() const;
+  [[nodiscard]] bool is_active();
 
-  bool is_active() const;
+  [[nodiscard]] size_t id() const;
 
-  const std::string &tag() const;
+  [[nodiscard]] const std::string &tag() const;
 
   template<typename T>
-  bool has_component() const;
+  [[nodiscard]] bool has_component() const;
 
   template<typename T, typename... TArgs>
   T &add_component(TArgs &&... mArgs);
 
   template<typename T>
-  T &get_component() const;
+  T &get_component();
 
   template<typename T>
-  T &remove_component() const;
+  const T &get_component() const;
 
-  [[nodiscard]] const std::string &get_tag() const;
-
-  [[nodiscard]] size_t get_id() const;
+  template<typename T>
+  void remove_component();
 };
 
 #endif //ADALL_INCLUDE_ADALL_ENTITY_HPP_

@@ -57,6 +57,7 @@ class CScore {
  public:
   int score{0};
 
+ CScore() = default;
   explicit CScore(int s);
 };
 
@@ -65,6 +66,7 @@ class CLifespan {
   int remaining{0};
   int total{0};
 
+ CLifespan() = default;
   explicit CLifespan(int t);
 };
 
@@ -73,13 +75,24 @@ class CBoundingBox : public Component {
   Vec2 size;
   Vec2 half_size;
 
+  CBoundingBox() = default;
   explicit CBoundingBox(const Vec2 &s);
 };
 
-class CAnimation {};
+class CAnimation {
+public:
+ float test{10};
+ CAnimation() = default;
+};
 
-class CGravity {};
+class CGravity {
+public:
+ CGravity() = default;
+};
 
-class CState {};
+class CState {
+public:
+ CState() = default;
+};
 
 #endif // COMPONENT_HPP

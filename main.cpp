@@ -1,28 +1,15 @@
-//#include "Adall/Vec2.hpp"
-//#include "Adall/Component.hpp"
-
+#include "Adall/EntityManager.hpp"
+#include "Adall/Component.hpp"
 #include <iostream>
 
-#include <SFML/Graphics.hpp>
-
 int main() {
-//    CBoundingBox a(Vec2(10, 10));
-//
-//    std::cout << a.size.x << "\n";
+    EntityManager em{};
 
-    sf::RenderWindow window(sf::VideoMode(523, 234), "test");
+    auto e{em.add_entity("player")};
 
-    while (window.isOpen()) {
-        sf::Event event{};
-        while (window.pollEvent(event)) {
-            if (event.type == sf::Event::Closed) {
-                window.close();
-            }
-        }
+    auto a = e->has_component<CAnimation>();
 
-        window.clear();
-        window.display();
-    }
+    std::cout << "boolean contain " << a << std::endl;
 
     return 0;
 }

@@ -2,7 +2,6 @@
 #define ADALL_INCLUDE_ADALL_ENTITYMANAGER_HPP_
 
 #include <vector>
-#include <memory>
 #include <map>
 
 #include "Adall/Entity.hpp"
@@ -14,10 +13,10 @@ typedef std::map<std::string, EntityVec> EntityMap;
 
 class EntityManager {
  private:
-  EntityVec entities_;
-  EntityVec entities_to_add_;
-  EntityMap entity_map_;
-  size_t total_entities_{0};
+  EntityVec m_entities;
+  EntityVec m_entities_to_add;
+  EntityMap m_entity_map;
+  size_t    m_total_entities{0};
 
   void remove_dead_entities(EntityVec &entity_vec);
 
