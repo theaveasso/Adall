@@ -35,3 +35,7 @@ const ActionMap &Scene::get_action_map() const {
 void Scene::draw_line(const Vec2 &p1, const Vec2 &p2) {
 
 }
+
+void Scene::do_action(const Action &action) {
+
+}

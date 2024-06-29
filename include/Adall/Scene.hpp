@@ -19,11 +19,7 @@ class Scene {
   bool m_has_ended{false};
   size_t m_current_frame{0};
 
-  virtual void on_end() = 0;
-
   void set_paused(bool paused);
-
- private:
 
  public:
   Scene();

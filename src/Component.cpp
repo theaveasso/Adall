@@ -32,3 +32,7 @@ CLifespan::CLifespan(int t) : remaining(t), total(t) {}
 CInput::CInput() = default;
 
 CBoundingBox::CBoundingBox(const Vec2 &s) : size(s), half_size(s.x / 2, s.y / 2) {}
+
+CAnimation::CAnimation() = default;
+
+CAnimation::CAnimation(Animation &animation, bool active) : m_animation(animation), m_active(active) {}

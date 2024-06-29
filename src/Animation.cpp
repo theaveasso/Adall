@@ -27,7 +27,7 @@ void Animation::update() {
 
     // TODO
     // 1. calculate the correct frame of animation to play based on currentframe and speed
-    // 2. set the texture rectangle properly (see contructor for simple)
+    // 2. set the texture rectangle properly (see constructor for simple)
 
 }
 
@@ -35,8 +35,6 @@ bool Animation::has_ended() const {
     // TODO detect when animation has ended (last frame was played) and return value
     return false;
 }
-
-
 
 
 

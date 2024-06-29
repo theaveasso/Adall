@@ -3,6 +3,7 @@
 
 #include <vector>
 #include <map>
+#include <memory>
 
 #include "Adall/Entity.hpp"
 
@@ -13,10 +14,10 @@ typedef std::map<std::string, EntityVec> EntityMap;
 
 class EntityManager {
  private:
-  EntityVec m_entities;
-  EntityVec m_entities_to_add;
+  EntityVec m_entities{};
+  EntityVec m_entities_to_add{};
   EntityMap m_entity_map;
-  size_t    m_total_entities{0};
+  size_t m_total_entities{0};
 
   void remove_dead_entities(EntityVec &entity_vec);
 

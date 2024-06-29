@@ -9,6 +9,9 @@ class Scene_Play : public Scene {
     std::string WEAPON;
   };
 
+ public:
+  Scene_Play(GameEngine *game_engine, std::string &level_path);
+
  protected:
   std::shared_ptr<Entity> m_player;
   std::string m_level_path;
@@ -20,19 +23,24 @@ class Scene_Play : public Scene {
   sf::Text m_grid_text;
 
   void init(const std::string &level_path);
-
   void update() override;
+  void on_end();
 
   void s_do_action(const Action &action) override;
+  void s_render() override;
+  void s_animation();
+  void s_movement();
+  void s_enemy_spawner();
+  void s_collision();
+  void s_debug();
+  void s_lifespan();
 
-  void s_render();
-
-  void on_end();
+  void spawn_player();
+  void spawn_bullet();
 
   void load_level(const std::string &level_path);
 
- public:
-  Scene_Play(GameEngine *game_engine, std::string level_path);
+  static Vec2 grid_to_mid_pixel(float grid_x, float grid_y, const std::shared_ptr<Entity> &entity);
 };
 
 #endif //ADALL_INCLUDE_ADALL_SCENE_PLAY_HPP_

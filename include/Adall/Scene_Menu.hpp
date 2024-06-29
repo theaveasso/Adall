@@ -15,6 +15,11 @@
 #include <deque>
 
 class Scene_Menu : public Scene {
+ public:
+  Scene_Menu(GameEngine *game_engine);
+
+  void on_end();
+
  protected:
   std::string m_title;
   std::vector<std::string> m_menu_strings;
@@ -23,18 +28,13 @@ class Scene_Menu : public Scene {
   sf::Text m_menu_text;
   size_t m_selected_menu_index{0};
 
-  void init();
-
   void update();
 
-  void on_end();
+  void s_render();
 
   void s_do_action(const Action &action);
 
- public:
-  Scene_Menu(GameEngine *game_engine = nullptr);
-
-  void s_render();
+  void init();
 
 };
 
