@@ -1,15 +1,9 @@
-#include "Adall/EntityManager.hpp"
-#include "Adall/Component.hpp"
-#include <iostream>
+#include "Adall/GameEngine.hpp"
 
 int main() {
-    EntityManager em{};
-
-    auto e{em.add_entity("player")};
-
-    auto a = e->has_component<CAnimation>();
-
-    std::cout << "boolean contain " << a << std::endl;
+    GameEngine game_engine;
+    game_engine.init("assets/");
+    game_engine.run();
 
     return 0;
 }

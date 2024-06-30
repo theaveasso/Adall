@@ -4,15 +4,15 @@
 #include "Adall/Scene.hpp"
 
 class Scene_Play : public Scene {
+ public:
+  explicit Scene_Play(GameEngine *game_engine, std::string &level_path);
+
+ protected:
   struct PlayerConfig {
     float X, Y, CX, CY, SPEED, MAXSPEED, JUMP, GRAVITY;
     std::string WEAPON;
   };
 
- public:
-  Scene_Play(GameEngine *game_engine, std::string &level_path);
-
- protected:
   std::shared_ptr<Entity> m_player;
   std::string m_level_path;
   PlayerConfig m_player_config;

@@ -7,12 +7,12 @@
 #include <SFML/Graphics.hpp>
 
 class Component {
-
+ public:
+  bool has{false};
 };
 
 class CTransform : public Component {
  public:
-  bool has{false};
   Vec2 pos{0.0f, 0.0f};
   Vec2 prev_pos{0.0f, 0.0f};
   Vec2 scale{1.0, 1.0};
@@ -27,7 +27,7 @@ class CTransform : public Component {
   CTransform(const Vec2 &position, const Vec2 &velocity, float angle);
 };
 
-class CShape {
+class CShape : public Component {
  public:
   bool has{false};
   sf::CircleShape circle;
@@ -39,38 +39,35 @@ class CShape {
          float thickness);
 };
 
-class CCollision {
+class CCollision : public Component {
  public:
-  bool has{false};
   float radius{0};
 
   explicit CCollision(float r);
 };
 
-class CInput {
+class CInput : public Component {
  public:
-  bool has{false};
   bool up{false};
   bool down{false};
   bool right{false};
   bool left{false};
   bool shoot{false};
+  bool can_shoot{false};
 
   CInput();
 };
 
-class CScore {
+class CScore : public Component {
  public:
-  bool has{false};
   int score{0};
 
   CScore() = default;
   explicit CScore(int s);
 };
 
-class CLifespan {
+class CLifespan : public Component {
  public:
-  bool has{false};
   int remaining{0};
   int total{0};
 
@@ -80,7 +77,6 @@ class CLifespan {
 
 class CBoundingBox : public Component {
  public:
-  bool has{false};
   Vec2 size;
   Vec2 half_size;
 
@@ -88,29 +84,26 @@ class CBoundingBox : public Component {
   explicit CBoundingBox(const Vec2 &s);
 };
 
-class CAnimation {
- private:
-  std::string m_name;
-  bool m_active{};
-  Animation m_animation;
-
+class CAnimation : public Component {
  public:
-  bool has{false};
-
   CAnimation();
 
   explicit CAnimation(Animation &animation, bool active);
+
+ private:
+  bool m_active{};
+  std::string m_name;
+  Animation m_animation;
+
 };
 
-class CGravity {
+class CGravity : public Component {
  public:
-  bool has{false};
   CGravity() = default;
 };
 
-class CState {
+class CState : public Component {
  public:
-  bool has{false};
   CState() = default;
 };
 

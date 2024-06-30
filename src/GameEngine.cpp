@@ -2,10 +2,9 @@
 #include "Adall/Scene_Menu.hpp"
 
 #include <iostream>
+#include <utility>
 
-GameEngine::GameEngine(const std::string &path) {
-    init(path);
-}
+GameEngine::GameEngine() = default;
 
 void GameEngine::init(const std::string &path) {
     m_assets.load_from_file(path);
@@ -23,6 +22,25 @@ void GameEngine::run() {
 }
 
 void GameEngine::update() {
+    s_user_input();
+    current_scene()->update();
+    current_scene()->s_render();
+}
+
+void GameEngine::quit() {
+    m_window.close();
+}
+
+void GameEngine::change_scene(const std::string &name, std::shared_ptr<Scene> scene) {
+    m_current_scene = name;
+    m_scenes[name] = scene;
+}
+
+void GameEngine::change_scene(const std::string &name, std::shared_ptr<Scene> scene, bool end_current_scene) {
+
+}
+
+void GameEngine::s_user_input() {
     sf::Event event{};
     while (m_window.pollEvent(event)) {
         if (event.type == sf::Event::Closed) {
@@ -51,21 +69,20 @@ void GameEngine::update() {
 
             const std::string action_type = (event.type == sf::Event::KeyPressed) ? "START" : "END";
 
-            current_scene()->do_action(Action(current_scene()->get_action_map().at(event.key.code), action_type));
+            current_scene()->s_do_action(Action(current_scene()->get_action_map().at(event.key.code), action_type));
+        }
+
+        if (event.type == sf::Event::MouseButtonPressed || event.type == sf::Event::MouseButtonReleased) {
+            if (current_scene()->get_action_map().find(event.key.code) == current_scene()->get_action_map().end()) {
+                continue;
+            }
+
+            const std::string action_type = (event.type == sf::Event::MouseButtonPressed) ? "START" : "END";
+
+            current_scene()->s_do_action(Action(current_scene()->get_action_map().at(event.key.code), action_type));
         }
 
     }
-}
-
-void GameEngine::quit() {
-    m_window.close();
-}
-
-void GameEngine::change_scene(const std::string &name, std::shared_ptr<Scene> scene) {
-
-}
-
-void GameEngine::change_scene(const std::string &name, std::shared_ptr<Scene> scene, bool end_current_scene) {
 
 }
 
@@ -77,7 +94,7 @@ bool GameEngine::is_running() const {
     return m_running && m_window.isOpen();
 }
 
-sf::Window &GameEngine::window() {
+sf::RenderWindow &GameEngine::window() {
     return m_window;
 }
 

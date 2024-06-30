@@ -18,4 +18,4 @@ add_executable(${PROJECT_NAME}
         ${headers}
 )
 
-target_link_libraries(${PROJECT_NAME} PRIVATE sfml-graphics)
+target_link_libraries(${PROJECT_NAME} PRIVATE sfml-graphics sfml-audio)

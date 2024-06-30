@@ -12,7 +12,7 @@ typedef std::map<int, std::string> ActionMap;
 
 class Scene {
  protected:
-  GameEngine *m_game{nullptr};
+  GameEngine *m_game;
   EntityManager m_entity_manager;
   ActionMap m_action_map;
   bool m_paused{false};
@@ -22,9 +22,8 @@ class Scene {
   void set_paused(bool paused);
 
  public:
-  Scene();
-
   explicit Scene(GameEngine *game_engine);
+  Scene(GameEngine *game_engine, std::string &level);
 
   virtual void update() = 0;
 

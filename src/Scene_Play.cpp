@@ -89,17 +89,11 @@ void Scene_Play::s_render() {
 
 void Scene_Play::s_do_action(const Action &action) {
     if (action.type() == "START") {
-        if (action.name() == "TOGGLE_TEXTURE") {
-            m_draw_textures = !m_draw_textures;
-        } else if (action.name() == "TOGGLE_COLLISION") {
-            m_draw_collision = !m_draw_collision;
-        } else if (action.name() == "TOGGLE_GRID") {
-            m_draw_collision = !m_draw_grid;
-        } else if (action.name() == "PAUSE") {
-            set_paused(!m_paused);
-        } else if (action.name() == "QUIT") {
-            on_end();
-        }
+        if (action.name() == "TOGGLE_TEXTURE") m_draw_textures = !m_draw_textures;
+        else if (action.name() == "TOGGLE_COLLISION") m_draw_collision = !m_draw_collision;
+        else if (action.name() == "TOGGLE_GRID") m_draw_collision = !m_draw_grid;
+        else if (action.name() == "PAUSE") set_paused(!m_paused);
+        else if (action.name() == "QUIT") on_end();
     } else if (action.type() == "END") {
 
     }

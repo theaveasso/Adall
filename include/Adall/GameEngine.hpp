@@ -16,7 +16,7 @@ typedef std::map<std::string, std::shared_ptr<Scene>> SceneMap;
 
 class GameEngine {
  public:
-  explicit GameEngine(const std::string &path);
+  GameEngine();
 
   void init(const std::string &path);
   void run();
@@ -24,23 +24,22 @@ class GameEngine {
   void quit();
 
   std::shared_ptr<Scene> current_scene();
+
   void change_scene(const std::string &name, std::shared_ptr<Scene> scene);
   void change_scene(const std::string &name, std::shared_ptr<Scene> scene, bool end_current_scene);
-
   void s_user_input();
 
   Assets &assets();
 
-  sf::Window &window();
+  sf::RenderWindow &window();
 
   bool is_running() const;
 
  private:
   Assets m_assets;
-  std::shared_ptr<Scene> m_scene;
-  sf::Window m_window;
+  sf::RenderWindow m_window;
   bool m_running{true};
-  std::string m_current_scene;
+  std::string m_current_scene{"MENU"};
 
   SceneMap m_scenes;
 };

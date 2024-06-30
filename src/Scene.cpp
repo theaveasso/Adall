@@ -1,9 +1,6 @@
 #include "Adall/Scene.hpp"
 
-Scene::Scene() = default;
-
-Scene::Scene(GameEngine *game_engine) {
-
+Scene::Scene(GameEngine *game_engine) : m_game(game_engine) {
 }
 
 void Scene::set_paused(bool paused) {
@@ -13,7 +10,7 @@ void Scene::set_paused(bool paused) {
 void Scene::simulate(const size_t frames) {}
 
 void Scene::register_action(int input_key, const std::string &action_name) {
-
+    m_action_map[input_key] = action_name;
 }
 
 size_t Scene::width() { return 0; }
